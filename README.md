@@ -138,15 +138,3 @@
   "10.244.0.113":1000
 }
 ```
-
-## Author's Conclusion
-Consider our [checkout workload](https://app.datadoghq.eu/apm/resource/dine-in-api/http.request/4d096aeeda6b8292?query=%40_top_level%3A1%20env%3Aproduction%20service%3Adine-in-api%20operation_name%3Ahttp.request%20resource_name%3A%22POST%20%2Fpayment%2Fcheckout%22&env=production&hostGroup=%2A&spanType=service-entry&topGraphs=latency%3Alatency%2Chits%3Aversion_rate%2Cerrors%3Aversion_count%2CbreakdownAs%3Apercentage&traces=qson%3A%28data%3A%28%29%2Cversion%3A%210%29&start=1687080277534&end=1689672277534&paused=false) for now is low(< 1 req/s). I think `ClientWithKubeResolver` is a good enough approach because
-1. We can avoid blocking `GetConnection` operation by reusing the channel.
-2. Even when our business scales up, we can evenly distribute the workload even when the pods scales. Though we don't consider the server state, the client load balancing is enough to avoid hot-spot and reduce overhead for a single server.
-
-## Team's Discussion
-[slack thread](https://deliveryhero.slack.com/archives/C032W7R5NT0/p1689741104640819)
-
-## Follow-up tickets
-* [DI-4487](https://jira.deliveryhero.com/browse/DI-4487)
-* [DI-4404](https://jira.deliveryhero.com/browse/DI-4404)
