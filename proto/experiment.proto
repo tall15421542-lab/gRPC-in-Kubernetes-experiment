@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = " github.com/deliveryhero/pd-dine-in-box/script/grpc-experiment/experiment";
+
+package experiment;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name, client type of grpc in our case.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings and the server ip address.
+message HelloReply {
+  string message = 1;
+  string ip_address = 2;
+}
